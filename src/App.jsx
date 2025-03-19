@@ -11,20 +11,48 @@ function App() {
    // console.log(praticeHours, totalTime, timeUnit, repeat);
 //Get current Date
 const startDate = new Date();
-//Convert totalTime to the unit of the timeUnit
-if(timeUnit === 'hours'){
-      totalTime = totalTime * 1000 * 60 * 60; //Convert to milliseconds
-    }else if(timeUnit === 'days'){
-      totalTime = totalTime * 1000 * 60 * 60 * 24; //Convert to milliseconds
-    }else if(timeUnit === 'weeks'){
-      totalTime = totalTime * 1000 * 60 * 60 * 24 * 7; //Convert to milliseconds
+//console.log(totalTime)
+let endDate;
+//Get the end date
+switch (timeUnit) {
+  case 'days':
+    endDate = new Date(startDate.getTime() + totalTime * 24 * 60 * 60 * 1000);
+    break;
+  case 'weeks':
+    endDate = new Date(startDate.getTime() + totalTime * 7 * 24 * 60 * 60 * 1000);
+    break;
+  case 'months':
+    // Create a new date object to avoid modifying the original
+    endDate = new Date(startDate);
+    
+    // Parse totalTime to ensure it's treated as a number
+    const monthsToAdd = parseInt(totalTime, 10);
+    
+    // Simple validation - if for some reason totalTime isn't a valid number
+    if (isNaN(monthsToAdd)) {
+      console.error("Invalid months value:", totalTime);
+      break;
     }
-console.log(startDate.getTime());
-console.log(totalTime);
-const endDate = (timeUnit = 'months') ? startDate.getMonth() + +totalTime : startDate.getTime() + totalTime
-console.log(startDate, endDate);
-//TODO: Add the values to the Log
-  }
+    
+    // Add the months
+    endDate.setMonth(endDate.getMonth() + monthsToAdd);
+    
+    // Log for debugging
+    // console.log(`Start date: ${startDate.toDateString()}`);
+    // console.log(`Adding ${monthsToAdd} months`);
+    // console.log(`End date: ${endDate.toDateString()}`);
+    break;
+  default:
+    break;
+}
+
+//Store end Date and praticeHours in local storage
+localStorage.setItem('endDate', endDate);
+localStorage.setItem('praticeHours', praticeHours);
+repeat && ( //If repeat is set, store the other values so they can be used to reset the timer
+  localStorage.setItem('totalTime', totalTime), 
+  localStorage.setItem('timeUnit', timeUnit)
+)
 
 
   return (
