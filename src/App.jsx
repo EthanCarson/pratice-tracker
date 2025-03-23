@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import GoalTracker from './GoalTracker';
 import { PraticeProvider } from './PraticeContext';
 import Timer from './Timer';
-
+import Log from './Log';
 function App() {
   return (
     <PraticeProvider>
@@ -20,7 +20,7 @@ function App() {
             </tr>
           </thead>
           <tbody>
-            {/* Add Components here */}
+            <Log />
           </tbody>
         </table>
       </div>
