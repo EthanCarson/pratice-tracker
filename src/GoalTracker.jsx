@@ -1,4 +1,4 @@
-function GoalTracker() {
+export default function GoalTracker() {
     function managePratice(e) {
         e.preventDefault();
         
