@@ -2,7 +2,7 @@
 Project Pratice Manager 
 App.jsx
 Generic Description
-Copyright Ethan Carson 2025
+Originally Created by Ethan Carson 2025
 *Made with Help from AI
 
 */
