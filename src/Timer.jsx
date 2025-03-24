@@ -3,7 +3,7 @@ import { createSignal, onCleanup, createEffect } from "solid-js"; // Import crea
 import { usePraticeContext } from "./PraticeContext"; // Import the custom hook
 
 export default function Timer() {
-    const { Pratice, currentPratice, setCurrentPratice, setHasStoredPratice } = usePraticeContext(); // Use the custom hook to access context
+    const { Pratice, setCompletedTime, setCurrentPratice, setHasStoredPratice } = usePraticeContext(); // Use the custom hook to access context
 
     let date;
     let start;
@@ -14,6 +14,7 @@ export default function Timer() {
     let minutes = 0;
     let seconds = 0;
     let intervalId; // Declare intervalId in the outer scope
+    const timePraticed = 0; // Variable to store the time practiced
 
     // Function to start the timer
     function startTimer() {
@@ -50,7 +51,17 @@ export default function Timer() {
         setIsTiming(false); // Set the timer state to stopped
 
         end = new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }); // Get the current time in hour:minute AM/PM format
-
+        const startTime = new Date(`1970-01-01T${start}`); // Create a Date object for the start time
+        const endTime = new Date(`1970-01-01T${end}`); // Create a Date object for the end time
+        timePraticed  += (endTime - startTime) / (1000 * 60 * 60); // Calculate the difference in hours
+        const storedPraticeHours = parseInt(localStorage.getItem('praticeHours'), 10) || 0; // Retrieve praticeHours from local storage
+        if (timePraticed >= storedPraticeHours) {
+            alert("Congratulations! You've met your practice hours goal.");
+            setCompletedTime(true); // Use the context function to update completedTime
+            localStorage.removeItem('praticeHours'); // Remove praticeHours from local storage
+        } else {
+            alert(`You have practiced for ${timePraticed} hours. Keep going to reach your goal of ${storedPraticeHours} hours!`);
+        }
         // Create a new Pratice object
         const pratice = new Pratice(start, end, date);
 
@@ -68,7 +79,7 @@ export default function Timer() {
     return (
         <>
             {/* Button to start the timer */}
-            <button onClick={() => { isTiming() ? stopTimer() : startTimer(); }}>{isTiming() ? "Stop" : "Start"}</button>
+            <button onClick={() => { isTiming() ? stopTimer() : startTimer(); }} className = {`btn ${isTiming() ? `btn-danger` : `btn-success`} btn-lg m-3`} >{isTiming() ? "Stop" : "Start"}</button>
             <div id="Timer" ref={el => timerDisplay = el}></div>
         </>
     );

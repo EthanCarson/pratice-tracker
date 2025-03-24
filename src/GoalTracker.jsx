@@ -50,22 +50,34 @@ export default function GoalTracker() {
           localStorage.setItem('timeUnit', timeUnit);
         }
         
-        console.log(startDate, endDate); // For debugging
+        //console.log(startDate, endDate); // For debugging
       }
-
+if(new Date(localStorage.getItem('endDate')).getTime() <= new Date().getTime()){
+    localStorage.removeItem('endDate'); // Remove the end date from local storage if it's today
+    if(localStorage.getItem('totalTime') && localStorage.getItem('timeUnit')){
+      document.getElementById('totalTime').value = localStorage.getItem('totalTime');
+      document.getElementById('timeUnit').value = localStorage.getItem('timeUnit');
+      managePratice(); // Call managePratice to reset the timer
+    }
+}
       return (
         <>
           {/* Form to input the number of hours to practice and the total time to practice */}
-          <form onSubmit={managePratice}>
-            <input type="number" id="praticeHours" />
-            <input type="number" id="totalTime" />
-            <select name="timeUnit" id="timeUnit">
+          <form onSubmit={managePratice} >
+            <label htmlFor="praticeHours" className="form-label m-3 lead">I want to pratice</label>
+            <input type="number" id="praticeHours" className="form-control m-3"/>
+            <label htmlFor="totalTime" className="form-label m-3 lead" >hours in</label>
+            <input type="number" id="totalTime" className="form-control m-3" />
+            <select name="timeUnit" id="timeUnit" className="form-select m-3" aria-label="Time Unit:">
               <option value="days">day(s)</option>
               <option value="weeks">week(s)</option>
               <option value="months">month(s)</option>
             </select>
-            <input type="checkbox" name="repeat" id="repeat" />
-            <input type="submit" />
+            
+            <input type="checkbox" name="repeat" id="repeat" className="form-check-input mb-3" />
+            <label htmlFor="repeat" className="form-check-label m-3 lead">  Repeat</label>
+            <br />
+            <input type="submit"  className="btn btn-outline-primary"/>
           </form>
           </>
       );

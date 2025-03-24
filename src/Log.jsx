@@ -3,7 +3,7 @@ import { usePraticeContext } from "./PraticeContext"; // Import the custom hook
 
 export default function Log() {
     const [pratices, setPratices] = createSignal([]); // Use createSignal to manage pratices state
-    const { Pratice, currentPratice } = usePraticeContext(); // Use the custom hook to access context
+    const { Pratice, currentPratice, completetedTime } = usePraticeContext(); // Use the custom hook to access context
 
     // Load the pratices array from local storage when the component mounts
     createEffect(() => {
@@ -23,6 +23,7 @@ export default function Log() {
 
     return (
         <>
+        {completetedTime && <p className="alert alert-success">Congratulations! You've met your practice hours goal.</p>}
             {pratices().map((pratice, index) => (
                 <tr key={index}>
                     <td>{pratice.date}</td>

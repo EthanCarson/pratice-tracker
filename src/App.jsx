@@ -4,14 +4,17 @@ import GoalTracker from './GoalTracker';
 import { PraticeProvider } from './PraticeContext';
 import Timer from './Timer';
 import Log from './Log';
+import Reminder from './Reminder';
 function App() {
   return (
     <PraticeProvider>
       <div className={styles.App}>
         <GoalTracker />
+        <br />
         <Timer />
         {/* Log of the time spent practicing */}
-        <table id="Log">
+        <br />
+        <table id="Log" className="table table-striped">
           <thead>
             <tr>
               <th>Date</th>
@@ -23,6 +26,9 @@ function App() {
             <Log />
           </tbody>
         </table>
+        <br />
+      <Reminder />
+
       </div>
     </PraticeProvider>
   );

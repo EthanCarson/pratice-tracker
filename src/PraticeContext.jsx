@@ -13,6 +13,7 @@ class Pratice {
 export function PraticeProvider(props) {
     const [hasStoredPratice, setHasStoredPratice] = createSignal(false);
     const [currentPratice, setCurrentPratice] = createSignal(null);
+    const [completedTime, setCompletedTime] = createSignal(false);
 
     return (
         <PraticeContext.Provider value={{ hasStoredPratice, setHasStoredPratice, currentPratice, setCurrentPratice, Pratice }}>
