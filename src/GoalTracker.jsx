@@ -1,3 +1,12 @@
+/*
+Project Pratice Manager 
+App.jsx
+Generic Description
+Copyright Ethan Carson 2025
+*Made with Help from AI
+
+*/
+
 export default function GoalTracker() {
     function managePratice(e) {
         e.preventDefault();

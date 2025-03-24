@@ -1,3 +1,12 @@
+/*
+Project Pratice Manager 
+App.jsx
+Generic Description
+Copyright Ethan Carson 2025
+*Made with Help from AI
+
+*/
+
 import { createSignal, onCleanup, createEffect } from "solid-js"; // Import createSignal, onCleanup, and createEffect
 
 import { usePraticeContext } from "./PraticeContext"; // Import the custom hook

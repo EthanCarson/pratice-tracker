@@ -1,3 +1,11 @@
+/*
+Project Pratice Manager 
+App.jsx
+Generic Description
+Copyright Ethan Carson 2025
+*Made with Help from AI
+
+*/
 import styles from './App.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import GoalTracker from './GoalTracker';
@@ -5,7 +13,9 @@ import { PraticeProvider } from './PraticeContext';
 import Timer from './Timer';
 import Log from './Log';
 import Reminder from './Reminder';
+
 function App() {
+
   return (
     <PraticeProvider>
       <div className={styles.App}>
@@ -32,6 +42,7 @@ function App() {
       </div>
     </PraticeProvider>
   );
+
 }
 
 export default App;

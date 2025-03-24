@@ -1,3 +1,12 @@
+/*
+Project Pratice Manager 
+App.jsx
+Generic Description
+Copyright Ethan Carson 2025
+*Made with Help from AI
+
+*/
+
 import { createContext, useContext, createSignal } from "solid-js";
 
 const PraticeContext = createContext();
