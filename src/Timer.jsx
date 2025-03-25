@@ -23,7 +23,7 @@ export default function Timer() {
     let minutes = 0;
     let seconds = 0;
     let intervalId; // Declare intervalId in the outer scope
-    const timePraticed = 0; // Variable to store the time practiced
+    let timePraticed = 0; // Variable to store the time practiced (let not const)
 
     // Function to start the timer
     function startTimer() {
@@ -69,7 +69,8 @@ export default function Timer() {
             setCompletedTime(true); // Use the context function to update completedTime
             localStorage.removeItem('praticeHours'); // Remove praticeHours from local storage
         } else {
-            alert(`You have practiced for ${timePraticed} hours. Keep going to reach your goal of ${storedPraticeHours} hours!`);
+            if (timePraticed != NaN) {
+            alert(`You have practiced for ${timePraticed} hours. Keep going to reach your goal of ${storedPraticeHours} hours!`);} //Only show Time Practiced if it is a number
         }
         // Create a new Pratice object
         const pratice = new Pratice(start, end, date);
