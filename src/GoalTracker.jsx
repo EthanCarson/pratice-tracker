@@ -16,6 +16,7 @@ export default function GoalTracker() {
         let totalTime = document.getElementById('totalTime').value;
         let timeUnit = document.getElementById('timeUnit').value;
         let repeat = document.getElementById('repeat').checked;
+        let praticeTopic = document.getElementById('praticeTopic').value;
         
         // Get current Date
         const startDate = new Date();
@@ -52,7 +53,7 @@ export default function GoalTracker() {
         // Store end Date and praticeHours in local storage
         localStorage.setItem('endDate', endDate);
         localStorage.setItem('praticeHours', praticeHours);
-        
+        localStorage.setItem('praticeTopic', praticeTopic);
         if (repeat) {
           // If repeat is set, store the other values so they can be used to reset the timer
           localStorage.setItem('totalTime', totalTime);
@@ -68,12 +69,22 @@ if(new Date(localStorage.getItem('endDate')).getTime() <= new Date().getTime()){
       document.getElementById('timeUnit').value = localStorage.getItem('timeUnit');
       managePratice(); // Call managePratice to reset the timer
     }
+    else{
+      //Remove everything from local storage
+      localStorage.removeItem('praticeHours');
+      localStorage.removeItem('praticeTopic');
+      localStorage.removeItem('totalTime');
+      localStorage.removeItem('timeUnit');
+      
+    }
 }
       return (
         <>
           {/* Form to input the number of hours to practice and the total time to practice */}
           <form onSubmit={managePratice} >
-            <label htmlFor="praticeHours" className="form-label m-3 lead">I want to pratice</label>
+            <label htmlFor="praticeTopic" className="form-label m-3 lead">I want to pratice</label>
+            <input type="text" id="praticeTopic" className="form-control m-3" placeholder="Enter topic you wish to pratice"/>
+            <label htmlFor="praticeHours" className="form-label m-3 lead">for</label>
             <input type="number" id="praticeHours" className="form-control m-3" placeholder="Enter hours to practice" />
             <label htmlFor="totalTime" className="form-label m-3 lead">hours in</label>
             <input type="number" id="totalTime" className="form-control m-3" placeholder="Enter total time" />

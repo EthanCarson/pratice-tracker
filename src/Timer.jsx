@@ -7,7 +7,7 @@ Originally Created by Ethan Carson 2025
 
 */
 
-import { createSignal, onCleanup, createEffect } from "solid-js"; // Import createSignal, onCleanup, and createEffect
+import { createSignal } from "solid-js"; // Import createSignal, onCleanup, and createEffect
 
 import { usePraticeContext } from "./PraticeContext"; // Import the custom hook
 
@@ -24,7 +24,10 @@ export default function Timer() {
     let seconds = 0;
     let intervalId; // Declare intervalId in the outer scope
     let timePraticed = 0; // Variable to store the time practiced (let not const)
-
+    let praticeTopic = localStorage.getItem('praticeTopic'); // Retrieve praticeTopic from local storage
+    if (praticeTopic === null) {
+        praticeTopic = ""; // Default value if praticeTopic is null
+    }
     // Function to start the timer
     function startTimer() {
         date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric' }); // Get the current date in month/day/year format
@@ -77,7 +80,7 @@ export default function Timer() {
         } else {
             if (!isNaN(timePraticed) && timePraticed > 0) {
                 console.log(timePraticed);
-                alert(`You have practiced for ${timePraticed.toFixed(2)} hours. Keep going to reach your goal of ${storedPraticeHours} hours!`); // Only show Time Practiced if it is a number
+                alert(`You practiced ${praticeTopic} for ${timePraticed.toFixed(2)} hours. Keep going to reach your goal of ${storedPraticeHours} hours!`); // Only show Time Practiced if it is a number
             }
         }
 

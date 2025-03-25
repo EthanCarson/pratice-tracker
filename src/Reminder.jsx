@@ -15,6 +15,11 @@ const { completedTime } = usePraticeContext(); // Use the custom hook to access 
     const endDate = localStorage.getItem('endDate');
     const date = new Date();
     const parsedEndDate = new Date(endDate); // Parse endDate to a Date object
+    let praticeTopic = localStorage.getItem('praticeTopic'); // Retrieve praticeTopic from local storage
+    if (praticeTopic === null) {
+        praticeTopic = ""; // Default value if praticeTopic is null
+    }
+    const praticeHours = localStorage.getItem('praticeHours');
     // console.log(date.getDate(), parsedEndDate.getDate()); // Use parsedEndDate.getDate() instead
  //   console.log(endDate);
 let extraReminder;
@@ -42,7 +47,7 @@ switch (date.getDate()) {
             !completedTime && 
             <div id="reminder">
                 {endDate && 
-                <p className="alert alert-primary">Reminder: Your goal ends on {endDate}</p>
+                <p className="alert alert-primary">Goal: pratice {praticeTopic} for {praticeHours} hours by {endDate}</p>
                 }
                 {extraReminder && <p className={`alert ${parsedEndDate.getDate() === date.getDate() ? `alert-danger` : `alert-warning`}`}>{extraReminder}</p> }
             </div>
