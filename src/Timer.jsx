@@ -28,7 +28,7 @@ export default function Timer() {
     // Function to start the timer
     function startTimer() {
         date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric' }); // Get the current date in month/day/year format
-        start = new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }); // Get the current time in hour:minute AM/PM format
+        start = new Date().getTime(); // Get the current time in milliseconds since Jan 1, 1970
 
         setIsTiming(true); // Set the timer state to running
 
@@ -59,19 +59,28 @@ export default function Timer() {
     function stopTimer() {
         setIsTiming(false); // Set the timer state to stopped
 
-        end = new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }); // Get the current time in hour:minute AM/PM format
-        const startTime = new Date(`1970-01-01T${start}`); // Create a Date object for the start time
-        const endTime = new Date(`1970-01-01T${end}`); // Create a Date object for the end time
-        timePraticed  += (endTime - startTime) / (1000 * 60 * 60); // Calculate the difference in hours
+     end = new Date().getTime(); // Get the current time in milliseconds since Jan 1, 1970
+
+        // Ensure startTime and endTime are valid
+        if (!isNaN(start) && !isNaN(end)) {
+            timePraticed += (end - start) / (1000 * 60 * 60); // Calculate the difference in hours
+        } else {
+            console.error("Invalid start or end time.");
+            return; // Exit if times are invalid
+        }
+
         const storedPraticeHours = parseInt(localStorage.getItem('praticeHours'), 10) || 0; // Retrieve praticeHours from local storage
         if (timePraticed >= storedPraticeHours) {
             alert("Congratulations! You've met your practice hours goal.");
             setCompletedTime(true); // Use the context function to update completedTime
             localStorage.removeItem('praticeHours'); // Remove praticeHours from local storage
         } else {
-            if (timePraticed != NaN) {
-            alert(`You have practiced for ${timePraticed} hours. Keep going to reach your goal of ${storedPraticeHours} hours!`);} //Only show Time Practiced if it is a number
+            if (!isNaN(timePraticed) && timePraticed > 0) {
+                console.log(timePraticed);
+                alert(`You have practiced for ${timePraticed.toFixed(2)} hours. Keep going to reach your goal of ${storedPraticeHours} hours!`); // Only show Time Practiced if it is a number
+            }
         }
+
         // Create a new Pratice object
         const pratice = new Pratice(start, end, date);
 

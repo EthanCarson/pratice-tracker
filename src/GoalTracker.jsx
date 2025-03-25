@@ -74,10 +74,10 @@ if(new Date(localStorage.getItem('endDate')).getTime() <= new Date().getTime()){
           {/* Form to input the number of hours to practice and the total time to practice */}
           <form onSubmit={managePratice} >
             <label htmlFor="praticeHours" className="form-label m-3 lead">I want to pratice</label>
-            <input type="number" id="praticeHours" className="form-control m-3"/>
-            <label htmlFor="totalTime" className="form-label m-3 lead" >hours in</label>
-            <input type="number" id="totalTime" className="form-control m-3" />
-            <select name="timeUnit" id="timeUnit" className="form-select m-3" aria-label="Time Unit:">
+            <input type="number" id="praticeHours" className="form-control m-3" placeholder="Enter hours to practice" />
+            <label htmlFor="totalTime" className="form-label m-3 lead">hours in</label>
+            <input type="number" id="totalTime" className="form-control m-3" placeholder="Enter total time" />
+            <select name="timeUnit" id="timeUnit" className="form-select m-3">
               <option value="days">day(s)</option>
               <option value="weeks">week(s)</option>
               <option value="months">month(s)</option>
