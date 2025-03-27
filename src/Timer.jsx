@@ -85,7 +85,9 @@ export default function Timer() {
         }
 
         // Create a new Pratice object
-        const pratice = new Pratice(start, end, date);
+        const starthrmin = new Date(start).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' });
+        const endhrmin = new Date(end).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' });
+        const pratice = new Pratice(starthrmin, endhrmin, date);
 
         setCurrentPratice(pratice); // Use the context function to update currentPratice
         setHasStoredPratice(true); // Use the context function to update hasStoredPratice
