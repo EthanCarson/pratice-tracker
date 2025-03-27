@@ -12,8 +12,8 @@ import { createSignal } from "solid-js"; // Import createSignal, onCleanup, and 
 import { usePraticeContext } from "./PraticeContext"; // Import the custom hook
 
 export default function Timer() {
-    const { Pratice, setCompletedTime, setCurrentPratice, setHasStoredPratice } = usePraticeContext(); // Use the custom hook to access context
-
+    const { Pratice, setCurrentPratice, setHasStoredPratice, setCompletedTime, completedTime } = usePraticeContext(); // Use the custom hook to access context
+setCompletedTime(completedTime); // Set completedTime to false when the Timer component mounts
     let date;
     let start;
     let end; // Variables to store the date, start time, and end time
@@ -75,7 +75,7 @@ export default function Timer() {
         const storedPraticeHours = parseInt(localStorage.getItem('praticeHours'), 10) || 0; // Retrieve praticeHours from local storage
         if (timePraticed >= storedPraticeHours) {
             alert("Congratulations! You've met your practice hours goal.");
-            setCompletedTime(true); // Use the context function to update completedTime
+           setCompletedTime(true); // Set completedTime to true
             localStorage.removeItem('praticeHours'); // Remove praticeHours from local storage
         } else {
             if (!isNaN(timePraticed) && timePraticed > 0) {

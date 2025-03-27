@@ -24,11 +24,27 @@ export function PraticeProvider(props) {
     const [currentPratice, setCurrentPratice] = createSignal(null);
     const [completedTime, setCompletedTime] = createSignal(false);
 
+    const contextValue = {
+        hasStoredPratice,
+        setHasStoredPratice,
+        currentPratice,
+        setCurrentPratice,
+        Pratice,
+        completedTime,
+        setCompletedTime
+    };
+
     return (
-        <PraticeContext.Provider value={{ hasStoredPratice, setHasStoredPratice, currentPratice, setCurrentPratice, Pratice }}>
+        <PraticeContext.Provider value={contextValue}>
             {props.children}
         </PraticeContext.Provider>
     );
 }
 
-export const usePraticeContext = () => useContext(PraticeContext);
+export const usePraticeContext = () => {
+    const context = useContext(PraticeContext);
+    if (!context) {
+        throw new Error("usePraticeContext must be used within a PraticeProvider");
+    }
+    return context;
+};

@@ -15,7 +15,6 @@ import Log from './Log';
 import Reminder from './Reminder';
 
 function App() {
-
   return (
     <PraticeProvider>
       <div className={styles.App}>
@@ -37,12 +36,10 @@ function App() {
           </tbody>
         </table>
         <br />
-      <Reminder />
-
+        <Reminder />
       </div>
     </PraticeProvider>
   );
-
 }
 
 export default App;
